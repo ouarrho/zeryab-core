@@ -1,9 +1,9 @@
 # Pi
  Hello Pi :)
 
-    ## DataBase : 
+    - DataBase : 
 
-        ### users :
+        users :
         ___________________________________________
 
         |   userId       : ( type, value, ... )   |
@@ -16,7 +16,7 @@
 
 
 
-    ## Backend Folder ( Users/ ): ( php, c#, dart, c++, rust, go, python, ruby, ... )
+    - Backend Folder ( Users/ ): ( php, c#, dart, c++, rust, go, python, ruby, ... )
         __________________________________________________
 
         |   insert.php : // functions(){ /* do... */ }   |
@@ -27,7 +27,7 @@
 
 
 
-    ## Frontend Folder ( Users/ ): ( javascript, typescript, react, vue, svelte, solid, angular, ... )
+    - Frontend Folder ( Users/ ): ( javascript, typescript, react, vue, svelte, solid, angular, ... )
         _____________________________________________________
 
         |   template.html : <!-- html code -->              |
