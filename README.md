@@ -5,7 +5,7 @@ Zeryab is a powerful tool for developers to easily create backends and frontends
 
 ##Project Tree:
 
-zeryab/
+`zeryab/
 ├── .config/
 │   ├── tables.yaml
 │   └── relations.yaml
@@ -25,4 +25,19 @@ zeryab/
     ├── ClassGenerator.php
     ├── ConnectGenerator.php
     ├── StructureGenerator.php
-    └── .htaccess
+    └── .htaccess`
+
+##Note:
+The .config/ directory contains two files: tables.yaml and relations.yaml. These files describe the structure of your database and the relations between tables.
+The output/ directory contains the generated code for your backend, including classes for each table, a connect.php file for establishing a database connection, and a structure.php file for creating the tables in your database.
+The src/ directory contains the core files of the Zeryab framework, including the Zeryab.php file for initializing the framework, the Config.php file for loading configuration data, and various generator files for generating code.
+For more information on how to use Zeryab, please refer to the documentation.
+
+##Usage
+Install Zeryab by cloning the repository or downloading the ZIP file.
+Configure your database tables in the .config/tables.yaml file.
+Declare the relationships between your tables in the .config/relations.yaml file.
+Run the Zeryab script to generate your backend code in the language of your choice.
+
+##License
+This project is licensed under the MIT License - see the LICENSE file for details.
