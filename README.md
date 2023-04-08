@@ -5,7 +5,7 @@ Zeryab is a powerful tool for developers to easily create backends and frontends
 
 ## Project Tree:
 
-`
+```bash
 zeryab/
 ├── .config/
 │   ├── tables.yaml
@@ -27,7 +27,7 @@ zeryab/
     ├── ConnectGenerator.php
     ├── StructureGenerator.php
     └── .htaccess
-`
+```
 
 ## Note:
 The .config/ directory contains two files: tables.yaml and relations.yaml. These files describe the structure of your database and the relations between tables.
