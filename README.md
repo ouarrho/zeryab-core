@@ -8,41 +8,45 @@ Zeryab is a powerful tool for developers to easily create backends and frontends
 ```bash
 zeryab/
 ├── .config/
-│   ├── tables.json
+│   │── tables.json
 │   └── relations.json
-├── output/
-│   ├── backend/
-│   │   ├── PHP/
-│   │   │   ├── db/
+│
+│── output/
+│   │── backend/
+│   │   │── PHP/
+│   │   │   │── db/
 │   │   │   │   └── Connection.php
 │   │   │   └── classes/
-│   |   |       └── ...(generated backend code)
-│   │   ├── Python/
-│   │   │   ├── db/
+│   │   │       └── ...(generated backend code)
+│   │   │
+│   │   │── Python/
+│   │   │   │── db/
 │   │   │   │   └── Connection.py
 │   │   │   └── classes/
-│   |   |       └── ...(generated backend code)
+│   │   │       └── ...(generated backend code)
+│   │   │
 │   │   └── Java/
-│   │   |   ├── db/
-│   │   |   │   └── Connection.java
-│   │   |   └── classes/
-│   |   |       └── ...(generated backend code)
+│   │   │   │── db/
+│   │   │   │   └── Connection.java
+│   │   │   └── classes/
+│   │   │       └── ...(generated backend code)
+│   │   │
 │   │   └── CSharp/
-│   │   |   ├── db/
-│   │   |   │   └── Connection.csharp
-│   │   |   └── classes/
-│   |   |       └── ...(generated backend code)
-│   |   └── ...(other programming languages)
+│   │   │   │── db/
+│   │   │   │   └── Connection.csharp
+│   │   │   └── classes/
+│   │   │       └── ...(generated backend code)
+│   │   │
+│   │   └── ...(other programming languages)
+│   │
 │   └── databases/
-│       ├── tables/
+│       │── tables/
 │           └── table1.sql
 │           └── table1_fk.sql
 │           └── table2.sql
 │           └── table2_fk.sql
 │           └── ...(other tables)
 └── src/
-    ├── Zeryab.php
-    ├── Config.php
     ├── databases/
     │   ├── DataBaseGenerator.php
     │   ├── PHPDataBaseGenerator.php
@@ -50,18 +54,23 @@ zeryab/
     │   ├── JavaDataBaseGenerator.php
     │   ├── CSharpDataBaseGenerator.php
     │   ├── ...(other language DB generators)
+    │
     ├── connections/
     │   ├── PHPConnectionGenerator.php
     │   ├── PythonConnectionGenerator.php
     │   ├── JavaConnectionGenerator.php
     │   ├── CSharpConnectionGenerator.php
     │   ├── ...(other language connection generators)
+    │
     ├── classes/
     │   ├── PHPClassGenerator.php
     │   ├── PythonClassGenerator.php
     │   ├── JavaClassGenerator.php
     │   ├── CSharpClassGenerator.php
     │   ├── ...(other language connection generators)
+    │
+    ├── Config.php
+    ├── Zeryab.php
 ```
 
 ## Note:
