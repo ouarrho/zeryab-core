@@ -1,0 +1,24 @@
+[
+  {
+    "name": "users",
+    "columns": [
+      { "name": "userId", "type": "int(11) unsigned", "primary_key": true },
+      { "name": "userName", "type": "varchar(255)" }
+    ]
+  },
+  {
+    "name": "reactions",
+    "columns": [
+      { "name": "reactionId", "type": "int(11) unsigned", "primary_key": true },
+      { "name": "reactionName", "type": "varchar(255)" }
+    ]
+  },
+  {
+    "name": "users_reactions",
+    "columns": [
+      { "name": "userReactionId", "type": "int(11) unsigned", "primary_key": true },
+      { "name": "userId", "type": "int(11) unsigned" },
+      { "name": "reactionId", "type": "int(11) unsigned" }
+    ]
+  }
+]

@@ -15,14 +15,15 @@ zeryab/
 │   │   ├── User.php
 │   │   ├── UserReaction.php
 │   │   └── Reaction.php
-│   ├── connect.php
-│   ├── structure.php
-│   └── .htaccess
+│   └── db/
+│       ├── connect.php
+│       ├── structure.php
+│       └── .htaccess
 └── src/
     ├── Zeryab.php
     ├── Config.php
-    ├── Table.php
-    ├── Relation.php
+    ├── Tables.php
+    ├── Relations.php
     ├── ClassGenerator.php
     ├── ConnectGenerator.php
     ├── StructureGenerator.php

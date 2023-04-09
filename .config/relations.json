@@ -1,0 +1,17 @@
+[
+  {
+    "table": "users_reactions",
+    "foreignKeys": [
+      {
+        "column": "userId",
+        "table": "users",
+        "description": "The user who made the reaction"
+      },
+      {
+        "column": "reactionId",
+        "table": "reactions",
+        "description": "The reaction made by the user"
+      }
+    ]
+  }
+]
