@@ -90,14 +90,14 @@ relations.json: Configuration file containing table relations.
 Inside each folder in the programming languages folders, we are going to find the following folders:
 - classes/: Stores generated classes.
 - db/: Contains the code for connecting to the database.
----- Connection.{programming language extension}: Generated code for connecting to the database.
+* Connection.{programming language extension}: Generated code for connecting to the database.
 
 #### databases/: Stores generated SQL files.
 - tables/: Contains SQL files for tables and relations.
----- table1.sql: Generated SQL file for table1.
----- table1_fk.sql: Generated SQL file for table1 foreign keys.
----- table2.sql: Generated SQL file for table2.
----- table2_fk.sql: Generated SQL file for table2 foreign keys.
+* table1.sql: Generated SQL file for table1.
+* table1_fk.sql: Generated SQL file for table1 foreign keys.
+* table2.sql: Generated SQL file for table2.
+* table2_fk.sql: Generated SQL file for table2 foreign keys.
 
 ### src/: Contains the core files of Zeryab.
 #### Zeryab File: 
