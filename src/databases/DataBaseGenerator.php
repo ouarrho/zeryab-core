@@ -13,19 +13,19 @@ class DataBaseGenerator {
      *
      * @param $Config The configuration object containing table and relation information.
      * @param string $output The output path where the generated SQL files will be saved.
-     * @return bool True if all files are successfully created and written, false otherwise.
+     * @return array An array containing the names of the generated SQL files if successful, an empty array otherwise.
      */
-    public function generateSQLFiles( $Config, string $output = "../output/databases/tables/" ): bool {
+    public function generateSQLFiles($Config, string $output = "../output/databases/tables/"): array {
         $tables = $Config->getTables();
         $relations = $Config->getRelations();
-        $success = true;
+        $generatedFiles = [];
 
         // Generate the SQL code for creating tables
         foreach ($tables as $table) {
             $tableName = $table['name'];
             $sql = $this->generateTableSQL($table);
-            if (file_put_contents("{$output}{$tableName}.sql", $sql) === false) {
-                $success = false;
+            if (file_put_contents("{$output}{$tableName}.sql", $sql) !== false) {
+                $generatedFiles[] = "{$tableName}.sql";
             }
         }
 
@@ -33,12 +33,12 @@ class DataBaseGenerator {
         foreach ($relations as $relation) {
             $tableName = $relation['table'];
             $sql = $this->generateRelationSQL($relation);
-            if (file_put_contents("{$output}{$tableName}_fk.sql", $sql, FILE_APPEND) === false) {
-                $success = false;
+            if (file_put_contents("{$output}{$tableName}_fk.sql", $sql, FILE_APPEND) !== false) {
+                $generatedFiles[] = "{$tableName}_fk.sql";
             }
         }
 
-        return $success;
+        return $generatedFiles;
     }
 
     /**
