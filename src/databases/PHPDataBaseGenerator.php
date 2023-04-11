@@ -29,48 +29,57 @@ class PHPDataBaseGenerator {
      * @param array $sqlFiles An array containing the names of the SQL files to execute.
      * @return string The generated PHP code for executing the SQL files.
      */
-		private function generateCode(array $sqlFiles): string {
-    		$code = "<?php\n\n";
-    		$code .= "class SQLExecuter {\n\n";
-    		$code .= "    private \$servername = 'localhost';\n";
-    		$code .= "    private \$username = 'username';\n";
-    		$code .= "    private \$password = 'password';\n";
-    		$code .= "    private \$dbname = 'database_name';\n";
-    		$code .= "    private \$conn;\n";
-    		$code .= "    private \$path;\n\n";
-    		$code .= "    public function __construct(\$path = '../../output/databases/tables/') {\n";
-    		$code .= "        \$this->path = \$path;\n";
-    		$code .= "        \$this->conn = new mysqli(\$this->servername, \$this->username, \$this->password, \$this->dbname);\n";
-    		$code .= "        if (\$this->conn->connect_error) {\n";
-    		$code .= "            die('Connection failed: ' . \$this->conn->connect_error);\n";
-    		$code .= "        }\n";
-    		$code .= "    }\n\n";
-    		$code .= "    public function __destruct() {\n";
-    		$code .= "        \$this->conn->close();\n";
-    		$code .= "    }\n\n";
+    private function generateCode(array $sqlFiles): string {
+        $code = "<?php\n\n";
+        $code .= "require_once 'Connection.php';\n\n";
+        $code .= "/**\n";
+        $code .= " * The SQLExecuter class extends the Connection class and provides methods to execute SQL files.\n";
+        $code .= " */\n";
+        $code .= "class SQLExecuter extends Connection {\n\n";
+        $code .= "    private \$path = '../../output/databases/tables/';\n\n";
+    
+        $code .= "    /**\n";
+        $code .= "     * SQLExecuter constructor.\n";
+        $code .= "     * @param string|null \$path The path to the SQL files.\n";
+        $code .= "     */\n";
+        $code .= "    public function __construct(\$path = null) {\n";
+        $code .= "        parent::__construct();\n";
+        $code .= "        if (\$path) {\n";
+        $code .= "            \$this->path = \$path;\n";
+        $code .= "        }\n";
+        $code .= "    }\n\n";
+    
+        $code .= "    /**\n";
+        $code .= "     * Executes all the SQL files.\n";
+        $code .= "     */\n";
+        $code .= "    public function execute_all() {\n";
+        foreach ($sqlFiles as $sqlFile) {
+            $methodName = 'execute_' . strtolower(pathinfo($sqlFile, PATHINFO_FILENAME));
+            $code .= "        \$this->{$methodName}();\n";
+        }
+        $code .= "    }\n\n";
 
-    		$code .= "    public function executeAll() {\n";
-    		foreach ($sqlFiles as $sqlFile) {
-        		$code .= "        \$this->execute_" . pathinfo($sqlFile, PATHINFO_FILENAME) . "();\n";
-    		}
-    		$code .= "    }\n\n";
+        foreach ($sqlFiles as $sqlFile) {
+            $methodName = 'execute_' . strtolower(pathinfo($sqlFile, PATHINFO_FILENAME));
+            $code .= "    /**\n";
+            $code .= "     * Executes the {$sqlFile} SQL file.\n";
+            $code .= "     */\n";
+            $code .= "    public function {$methodName}() {\n";
+            $code .= "        \$sql = file_get_contents(\$this->path . '{$sqlFile}');\n";
+            $code .= "        try {\n";
+            $code .= "            \$this->conn->exec(\$sql);\n";
+            $code .= "            echo '{$sqlFile} executed successfully.';\n";
+            $code .= "        } catch (PDOException \$e) {\n";
+            $code .= "            echo 'Error executing {$sqlFile}: ' . \$e->getMessage();\n";
+            $code .= "        }\n";
+            $code .= "    }\n\n";
+        }
 
-    		foreach ($sqlFiles as $sqlFile) {
-        		$code .= "    public function execute_" . pathinfo($sqlFile, PATHINFO_FILENAME) . "() {\n";
-        		$code .= "        \$sql = file_get_contents(\$this->path . '{$sqlFile}');\n";
-        		$code .= "        if (\$this->conn->multi_query(\$sql) === TRUE) {\n";
-        		$code .= "            echo '{$sqlFile} executed successfully.';\n";
-        		$code .= "        } else {\n";
-        		$code .= "            echo 'Error executing {$sqlFile}: ' . \$this->conn->error;\n";
-        		$code .= "        }\n";
-        		$code .= "    }\n\n";
-    		}
+        $code .= "}\n\n";
+        $code .= "?>";
 
-    		$code .= "}\n\n";
-    		$code .= "?>";
-
-    		return $code;
-		}
+        return $code;
+    }
 
 }
 

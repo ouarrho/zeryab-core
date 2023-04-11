@@ -1,66 +1,84 @@
 <?php
 
-class SQLExecuter {
+require_once 'Connection.php';
 
-    private $servername = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    private $dbname = 'zeryab';
-    private $conn;
-    private $path;
+/**
+ * The SQLExecuter class extends the Connection class and provides methods to execute SQL files.
+ */
+class SQLExecuter extends Connection {
 
-    public function __construct($path = '../../output/databases/tables/') {
-        $this->path = $path;
-        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
-        if ($this->conn->connect_error) {
-            die('Connection failed: ' . $this->conn->connect_error);
+    private $path = '../../output/databases/tables/';
+
+    /**
+     * SQLExecuter constructor.
+     * @param string|null $path The path to the SQL files.
+     */
+    public function __construct($path = null) {
+        parent::__construct();
+        if ($path) {
+            $this->path = $path;
         }
     }
 
-    public function __destruct() {
-        $this->conn->close();
-    }
-
-    public function executeAll() {
+    /**
+     * Executes all the SQL files.
+     */
+    public function execute_all() {
         $this->execute_users();
         $this->execute_reactions();
         $this->execute_users_reactions();
         $this->execute_users_reactions_fk();
     }
 
+    /**
+     * Executes the users.sql SQL file.
+     */
     public function execute_users() {
         $sql = file_get_contents($this->path . 'users.sql');
-        if ($this->conn->multi_query($sql) === TRUE) {
+        try {
+            $this->conn->exec($sql);
             echo 'users.sql executed successfully.';
-        } else {
-            echo 'Error executing users.sql: ' . $this->conn->error;
+        } catch (PDOException $e) {
+            echo 'Error executing users.sql: ' . $e->getMessage();
         }
     }
 
+    /**
+     * Executes the reactions.sql SQL file.
+     */
     public function execute_reactions() {
         $sql = file_get_contents($this->path . 'reactions.sql');
-        if ($this->conn->multi_query($sql) === TRUE) {
+        try {
+            $this->conn->exec($sql);
             echo 'reactions.sql executed successfully.';
-        } else {
-            echo 'Error executing reactions.sql: ' . $this->conn->error;
+        } catch (PDOException $e) {
+            echo 'Error executing reactions.sql: ' . $e->getMessage();
         }
     }
 
+    /**
+     * Executes the users_reactions.sql SQL file.
+     */
     public function execute_users_reactions() {
         $sql = file_get_contents($this->path . 'users_reactions.sql');
-        if ($this->conn->multi_query($sql) === TRUE) {
+        try {
+            $this->conn->exec($sql);
             echo 'users_reactions.sql executed successfully.';
-        } else {
-            echo 'Error executing users_reactions.sql: ' . $this->conn->error;
+        } catch (PDOException $e) {
+            echo 'Error executing users_reactions.sql: ' . $e->getMessage();
         }
     }
 
+    /**
+     * Executes the users_reactions_fk.sql SQL file.
+     */
     public function execute_users_reactions_fk() {
         $sql = file_get_contents($this->path . 'users_reactions_fk.sql');
-        if ($this->conn->multi_query($sql) === TRUE) {
+        try {
+            $this->conn->exec($sql);
             echo 'users_reactions_fk.sql executed successfully.';
-        } else {
-            echo 'Error executing users_reactions_fk.sql: ' . $this->conn->error;
+        } catch (PDOException $e) {
+            echo 'Error executing users_reactions_fk.sql: ' . $e->getMessage();
         }
     }
 
