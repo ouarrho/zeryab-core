@@ -53,7 +53,8 @@ class PHPClassGenerator {
    */
   private function generateCode(string $tableName, array $columns, string $className): string {
     $code = "<?php\n\n";
-    $code .= "class {$className} {\n\n";
+  	$code .= "require_once '../db/Connection.php';\n\n";
+  	$code .= "class {$className} extends Connection {\n\n";
     
     // Add class properties
     $code .= "  private \$conn;\n\n";
@@ -113,6 +114,7 @@ private function generateInsertMethod(string $tableName, array $columns): string
 
   return $code;
 }
+
 
 
 /*
