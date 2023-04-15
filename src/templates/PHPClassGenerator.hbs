@@ -1,0 +1,20 @@
+<?php
+require_once '../db/Connection.php';
+
+class {{className}} extends {{connectionClass}} {
+  private $pdo;
+
+  public function __construct() {
+    $connection = new Connection();
+    $this->pdo = $connection->conn;
+  }
+
+  {{insertMethod}}
+
+  {{selectMethod}}
+
+  {{updateMethod}}
+
+  {{deleteMethod}}
+}
+?>

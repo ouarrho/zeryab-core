@@ -1,4 +1,4 @@
-# Zeryab Framework
+# Zeryab Core
 Build Powerful and Magnificent Apps From Your Database Architecture.
 
 Zeryab is a powerful tool for developers to easily create backends and frontends and establish connections between them. It provides the ability to generate databases and can output backend code in various languages such as JavaScript, Python, Rust, Java, C#, PHP, and more. With Zeryab, developers can quickly and efficiently build robust and scalable applications.
@@ -16,24 +16,7 @@ zeryab/
 │   │   │── PHP/
 │   │   │   │── db/
 │   │   │   │   └── Connection.php
-│   │   │   └── classes/
-│   │   │       └── ...(generated backend code)
-│   │   │
-│   │   │── Python/
-│   │   │   │── db/
-│   │   │   │   └── Connection.py
-│   │   │   └── classes/
-│   │   │       └── ...(generated backend code)
-│   │   │
-│   │   └── Java/
-│   │   │   │── db/
-│   │   │   │   └── Connection.java
-│   │   │   └── classes/
-│   │   │       └── ...(generated backend code)
-│   │   │
-│   │   └── CSharp/
-│   │   │   │── db/
-│   │   │   │   └── Connection.csharp
+│   │   │   │   └── SQLExecuter.php
 │   │   │   └── classes/
 │   │   │       └── ...(generated backend code)
 │   │   │
@@ -48,29 +31,27 @@ zeryab/
 │           └── ...(other tables)
 └── src/
     ├── databases/
-    │   ├── DataBaseGenerator.php
-    │   ├── PHPDataBaseGenerator.php
-    │   ├── PythonDataBaseGenerator.php
-    │   ├── JavaDataBaseGenerator.php
-    │   ├── CSharpDataBaseGenerator.php
+    │   ├── DataBaseGenerator.js
+    │   ├── PHPDataBaseGenerator.js
     │   ├── ...(other language DB generators)
     │
-    ├── connections/
-    │   ├── PHPConnectionGenerator.php
-    │   ├── PythonConnectionGenerator.php
-    │   ├── JavaConnectionGenerator.php
-    │   ├── CSharpConnectionGenerator.php
-    │   ├── ...(other language connection generators)
-    │
     ├── classes/
-    │   ├── PHPClassGenerator.php
-    │   ├── PythonClassGenerator.php
-    │   ├── JavaClassGenerator.php
-    │   ├── CSharpClassGenerator.php
+    │   ├── PHPClassGenerator.js
     │   ├── ...(other language connection generators)
     │
-    ├── Config.php
-    ├── Zeryab.php
+    ├── templates/
+    │   ├── PHPClassGenerator.hbs
+    │   ├── PHPDataBaseConnectionGenerator.hbs
+    │   ├── PHPDataBaseSQLExecuterGenerator.hbs
+    │   ├── ...(other templates)
+    │
+    ├── utils/
+    │   ├── Parser.js
+    │   ├── StringHelper.js
+    │   ├── ...(other classes)
+    │
+    ├── Config.js
+    ├── Zeryab.js
 ```
 
 ## Note:

@@ -1,37 +1,32 @@
 <?php
+require_once '../db/Connection.php';
 
-class UsersReactions {
+class UsersReactions extends Connection {
+  private $pdo;
 
-  private $conn;
-
-  public function __construct($conn) {
-    $this->conn = $conn;
+  public function __construct() {
+    $connection = new Connection();
+    $this->pdo = $connection->conn;
   }
 
-  /**
-   * Insert a new row into the users_reactions table.
-   *
-   * @param array $data An associative array of column names and their values to be inserted.
-   * @return int The ID of the inserted row.
-   */
-  public function insert(array $data = []): int {
-    $defaultValues = [
-      'userReactionId' => null,
-      'userId' => null,
-      'reactionId' => null,
-    ];
+  public function insert(array $data): bool {
+  $sql &#x3D; &quot;INSERT INTO users_reactions &quot;;
+  $stmt &#x3D; $this-&gt;pdo-&gt;prepare($sql);
 
-    $data = array_merge($defaultValues, $data);
+  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userReactionId&#x27;]);
+  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userId&#x27;]);
+  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;reactionId&#x27;]);
 
-    $sql = 'INSERT INTO users_reactions (`userReactionId`, `userId`, `reactionId`) VALUES (:userReactionId, :userId, :reactionId)';
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bindValue(':userReactionId', $data['userReactionId']);
-    $stmt->bindValue(':userId', $data['userId']);
-    $stmt->bindValue(':reactionId', $data['reactionId']);
-    $stmt->execute();
-    return $this->conn->lastInsertId();
-  }
-
+  return $stmt-&gt;execute();
 }
+/*
+(userReactionId, userId, reactionId) VALUES (:, :, :)
+*/
 
+  
+
+  
+
+  
+}
 ?>

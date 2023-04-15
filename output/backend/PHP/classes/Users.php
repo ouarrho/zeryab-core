@@ -1,35 +1,31 @@
 <?php
+require_once '../db/Connection.php';
 
-class Users {
+class Users extends Connection {
+  private $pdo;
 
-  private $conn;
-
-  public function __construct($conn) {
-    $this->conn = $conn;
+  public function __construct() {
+    $connection = new Connection();
+    $this->pdo = $connection->conn;
   }
 
-  /**
-   * Insert a new row into the users table.
-   *
-   * @param array $data An associative array of column names and their values to be inserted.
-   * @return int The ID of the inserted row.
-   */
-  public function insert(array $data = []): int {
-    $defaultValues = [
-      'userId' => null,
-      'userName' => null,
-    ];
+  public function insert(array $data): bool {
+  $sql &#x3D; &quot;INSERT INTO users &quot;;
+  $stmt &#x3D; $this-&gt;pdo-&gt;prepare($sql);
 
-    $data = array_merge($defaultValues, $data);
+  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userId&#x27;]);
+  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userName&#x27;]);
 
-    $sql = 'INSERT INTO users (`userId`, `userName`) VALUES (:userId, :userName)';
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bindValue(':userId', $data['userId']);
-    $stmt->bindValue(':userName', $data['userName']);
-    $stmt->execute();
-    return $this->conn->lastInsertId();
-  }
-
+  return $stmt-&gt;execute();
 }
+/*
+(userId, userName) VALUES (:, :)
+*/
 
+  
+
+  
+
+  
+}
 ?>

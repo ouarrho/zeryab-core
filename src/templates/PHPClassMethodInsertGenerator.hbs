@@ -1,0 +1,13 @@
+public function insert(array $data): bool {
+  $sql = "INSERT INTO {{tableName}} ";
+  $stmt = $this->pdo->prepare($sql);
+
+  {{#each columns}}
+  $stmt->bindParam(':{{paramName}}', $data['{{name}}']);
+  {{/each}}
+
+  return $stmt->execute();
+}
+/*
+({{#each columns}}{{name}}{{#unless @last}}, {{/unless}}{{/each}}) VALUES ({{#each columns}}:{{paramName}}{{#unless @last}}, {{/unless}}{{/each}})
+*/
