@@ -9,24 +9,20 @@ class UsersReactions extends Connection {
     $this->pdo = $connection->conn;
   }
 
-  public function insert(array $data): bool {
-  $sql &#x3D; &quot;INSERT INTO users_reactions &quot;;
-  $stmt &#x3D; $this-&gt;pdo-&gt;prepare($sql);
+	public function insert(array $data): bool {
+  	$userReactionId = ( isset($data[ 'userReactionId' ]) && !empty($data[ 'userReactionId' ]) ) ? htmlspecialchars( $data[ 'userReactionId' ], ENT_QUOTES, 'UTF-8' ) : null;
+  	$userId = ( isset($data[ 'userId' ]) && !empty($data[ 'userId' ]) ) ? htmlspecialchars( $data[ 'userId' ], ENT_QUOTES, 'UTF-8' ) : null;
+  	$reactionId = ( isset($data[ 'reactionId' ]) && !empty($data[ 'reactionId' ]) ) ? htmlspecialchars( $data[ 'reactionId' ], ENT_QUOTES, 'UTF-8' ) : null;
 
-  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userReactionId&#x27;]);
-  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userId&#x27;]);
-  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;reactionId&#x27;]);
+  	$sql = "INSERT INTO users_reactions (userReactionId, userId, reactionId) VALUES (:userReactionId, :userId, :reactionId)";
+  	$stmt = $this->pdo->prepare($sql);
 
-  return $stmt-&gt;execute();
-}
-/*
-(userReactionId, userId, reactionId) VALUES (:, :, :)
-*/
+  	$stmt->bindParam(':userReactionId', $userReactionId);
+  	$stmt->bindParam(':userId', $userId);
+  	$stmt->bindParam(':reactionId', $reactionId);
 
-  
+  	return $stmt->execute();
+	}
 
-  
-
-  
 }
 ?>

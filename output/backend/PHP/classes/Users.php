@@ -9,23 +9,18 @@ class Users extends Connection {
     $this->pdo = $connection->conn;
   }
 
-  public function insert(array $data): bool {
-  $sql &#x3D; &quot;INSERT INTO users &quot;;
-  $stmt &#x3D; $this-&gt;pdo-&gt;prepare($sql);
+	public function insert(array $data): bool {
+  	$userId = ( isset($data[ 'userId' ]) && !empty($data[ 'userId' ]) ) ? htmlspecialchars( $data[ 'userId' ], ENT_QUOTES, 'UTF-8' ) : null;
+  	$userName = ( isset($data[ 'userName' ]) && !empty($data[ 'userName' ]) ) ? htmlspecialchars( $data[ 'userName' ], ENT_QUOTES, 'UTF-8' ) : null;
 
-  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userId&#x27;]);
-  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;userName&#x27;]);
+  	$sql = "INSERT INTO users (userId, userName) VALUES (:userId, :userName)";
+  	$stmt = $this->pdo->prepare($sql);
 
-  return $stmt-&gt;execute();
-}
-/*
-(userId, userName) VALUES (:, :)
-*/
+  	$stmt->bindParam(':userId', $userId);
+  	$stmt->bindParam(':userName', $userName);
 
-  
+  	return $stmt->execute();
+	}
 
-  
-
-  
 }
 ?>

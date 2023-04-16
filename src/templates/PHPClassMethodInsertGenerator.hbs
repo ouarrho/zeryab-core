@@ -1,5 +1,5 @@
 public function insert(array $data): bool {
-  $sql = "INSERT INTO {{tableName}} ";
+  $sql = 'INSERT INTO {{tableName}} ';
   $stmt = $this->pdo->prepare($sql);
 
   {{#each columns}}

@@ -9,23 +9,18 @@ class Reactions extends Connection {
     $this->pdo = $connection->conn;
   }
 
-  public function insert(array $data): bool {
-  $sql &#x3D; &quot;INSERT INTO reactions &quot;;
-  $stmt &#x3D; $this-&gt;pdo-&gt;prepare($sql);
+	public function insert(array $data): bool {
+  	$reactionId = ( isset($data[ 'reactionId' ]) && !empty($data[ 'reactionId' ]) ) ? htmlspecialchars( $data[ 'reactionId' ], ENT_QUOTES, 'UTF-8' ) : null;
+  	$reactionName = ( isset($data[ 'reactionName' ]) && !empty($data[ 'reactionName' ]) ) ? htmlspecialchars( $data[ 'reactionName' ], ENT_QUOTES, 'UTF-8' ) : null;
 
-  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;reactionId&#x27;]);
-  $stmt-&gt;bindParam(&#x27;:&#x27;, $data[&#x27;reactionName&#x27;]);
+  	$sql = "INSERT INTO reactions (reactionId, reactionName) VALUES (:reactionId, :reactionName)";
+  	$stmt = $this->pdo->prepare($sql);
 
-  return $stmt-&gt;execute();
-}
-/*
-(reactionId, reactionName) VALUES (:, :)
-*/
+  	$stmt->bindParam(':reactionId', $reactionId);
+  	$stmt->bindParam(':reactionName', $reactionName);
 
-  
+  	return $stmt->execute();
+	}
 
-  
-
-  
 }
 ?>

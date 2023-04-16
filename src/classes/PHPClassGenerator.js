@@ -56,15 +56,11 @@ class PHPClassGenerator {
     const classTemplate = fs.readFileSync('src/templates/PHPClassGenerator.hbs', 'utf8');
     const compiledClassTemplate = Handlebars.compile(classTemplate);
 
-    const insertMethod = this.#generateInsertMethod(tableName, columns);
-    // Add other CRUD method calls as needed
-
     const classData = {
       className: className,
       connectionClass: 'Connection',
       tableName: tableName,
-      insertMethod: insertMethod,
-      // Add other CRUD methods as needed
+      columns: columns
     };
 
     return compiledClassTemplate(classData);
@@ -77,7 +73,7 @@ class PHPClassGenerator {
    * @returns {string} The generated PHP insert method code.
    */
   #generateInsertMethod(tableName, columns) {
-    const insertMethodTemplate = fs.readFileSync('src/templates/PHPClassMethodInsertGenerator.hbs', 'utf8');
+    const insertMethodTemplate = fs.readFileSync('src/templates/PHPClassMethodInsertGenerator.hbs');
     const compiledInsertMethodTemplate = Handlebars.compile(insertMethodTemplate);
 
   const methodData = {
